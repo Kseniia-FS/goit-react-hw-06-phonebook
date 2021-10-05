@@ -19,7 +19,7 @@ const filter = createReducer("", {
   [changeFilter]: (_, action) => action.payload,
 });
 
-export default combineReducers({
+export const contactsReducer = combineReducers({
   items,
   filter,
 });
