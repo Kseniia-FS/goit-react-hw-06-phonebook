@@ -1,26 +1,13 @@
 import React from "react";
-
+import { getFilteredContacts } from "../../redux/contacts/contacts-selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteContact } from "../../redux/contacts/contacts-actions";
-
 import { ReactComponent as BinIcon } from "../../icons/bin.svg";
-
 import Button from "../../_share/Button/Button";
 import { ContactList, Item, Title } from "./Contacts.styled";
 
 export function Contacts() {
-  const getFilteredContacts = (contacts, filter) => {
-    const normalizedContacts = filter.toLowerCase();
-
-    const filteredContacts = contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(normalizedContacts)
-    );
-    return filteredContacts;
-  };
-
-  const contacts = useSelector(({ contacts: { items, filter } }) =>
-    getFilteredContacts(items, filter)
-  );
+  const contacts = useSelector(getFilteredContacts);
   const dispatch = useDispatch();
   const onDeleteContacts = (id) => dispatch(deleteContact(id));
 
